@@ -1,0 +1,369 @@
+<title>TagOnLong</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+
+<style>
+  /* Long.xyz leans retro-computing — its own page is built around a Macintosh,
+     a Game Boy, a GPU. So the palette is the Game Boy DMG's four tones, which
+     happen to sit almost exactly on the TAG logo's own #06350B. Two brands,
+     one green, no compromise. */
+  :root {
+    --dmg-darkest: #0F380F;
+    --dmg-dark:    #306230;
+    --dmg-light:   #8BAC0F;
+    --dmg-screen:  #9BBC0F;
+
+    --bg: #EDF1E0;
+    --panel: #FFFFFF;
+    --screen: #C6D69A;
+    --line: #CBD7B4;
+    --ink: #0F380F;
+    --muted: #4C6340;
+    --accent: #306230;
+    --brass: #7A5B14;
+    --brass-bg: rgba(122,91,20,.13);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #071A09;
+      --panel: #0D2A10;
+      --screen: #123515;
+      --line: #1D4420;
+      --ink: #DCEBC8;
+      --muted: #85A473;
+      --accent: #9BBC0F;
+      --brass: #D9B24F;
+      --brass-bg: rgba(217,178,79,.14);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #071A09; --panel: #0D2A10; --screen: #123515; --line: #1D4420;
+    --ink: #DCEBC8; --muted: #85A473; --accent: #9BBC0F;
+    --brass: #D9B24F; --brass-bg: rgba(217,178,79,.14);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font: 16px/1.6 'IBM Plex Mono', ui-monospace, monospace;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: 720px; margin: 0 auto; padding-inline: 20px; }
+
+  /* ---------- header ---------- */
+
+  header {
+    display: flex; align-items: center; gap: 12px;
+    padding-block: 20px; border-bottom: 2px solid var(--ink);
+  }
+  .mark {
+    width: 34px; height: 34px; display: block; flex-shrink: 0;
+    border: 2px solid var(--ink);
+  }
+  .wordmark {
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    font-weight: 700; font-size: 19px; letter-spacing: -.03em; margin-right: auto;
+  }
+
+  .xlink {
+    display: inline-flex; align-items: center; gap: 7px;
+    font-size: 13px; font-weight: 500; text-decoration: none;
+    color: var(--ink); border: 2px solid var(--ink);
+    padding: 6px 12px;
+  }
+  .xlink:hover { background: var(--ink); color: var(--bg); }
+  .xlink svg { display: block; }
+
+  /* ---------- hero ---------- */
+
+  .hero { padding-block: 44px 0; }
+
+  .eyebrow {
+    font-size: 12px; letter-spacing: .14em; color: var(--muted); margin-bottom: 18px;
+  }
+  .eyebrow b { color: var(--accent); font-weight: 500; }
+
+  h1 {
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    font-size: clamp(32px, 6.4vw, 50px); font-weight: 700;
+    line-height: 1.03; letter-spacing: -.04em; margin: 0; text-wrap: balance;
+  }
+  h1 em { font-style: normal; color: var(--accent); }
+
+  .lede { color: var(--muted); margin: 18px 0 0; max-width: 54ch; font-size: 15px; }
+
+  /* ---------- the screen ----------
+     One bold element: the launches sit inside a handheld screen, dot-matrix and
+     all. Everything around it stays flat and quiet. */
+
+  .screen {
+    margin-top: 36px; background: var(--screen);
+    border: 2px solid var(--ink); padding: 4px;
+  }
+  .screen-inner {
+    border: 1px solid rgba(15,56,15,.22); padding: 14px 16px;
+    background-image:
+      repeating-linear-gradient(0deg, rgba(15,56,15,.045) 0 1px, transparent 1px 3px);
+  }
+  :root[data-theme="dark"] .screen-inner,
+  :root:not([data-theme="light"]) .screen-inner { border-color: rgba(155,188,15,.18); }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .screen-inner {
+      background-image:
+        repeating-linear-gradient(0deg, rgba(155,188,15,.05) 0 1px, transparent 1px 3px);
+    }
+  }
+
+  .screen-bar {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 11px; letter-spacing: .12em; color: var(--muted);
+    padding-bottom: 10px; margin-bottom: 4px;
+    border-bottom: 1px dashed rgba(15,56,15,.25);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .screen-bar { border-bottom-color: rgba(155,188,15,.2); }
+  }
+  .screen-bar .dot {
+    width: 7px; height: 7px; border-radius: 50%; background: var(--accent);
+    box-shadow: 0 0 0 3px rgba(48,98,48,.18);
+  }
+  .screen-bar .count { margin-left: auto; }
+
+  .row {
+    display: flex; align-items: center; gap: 12px;
+    padding: 12px 0; border-bottom: 1px dashed rgba(15,56,15,.2);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .row { border-bottom-color: rgba(155,188,15,.16); }
+  }
+  .row:last-child { border-bottom: none; }
+  .row .grow { flex: 1; min-width: 0; }
+  .row .name {
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    font-weight: 700; font-size: 16px; letter-spacing: -.01em;
+  }
+  .row .name span { font-family: 'IBM Plex Mono', monospace; font-weight: 400; font-size: 13px; color: var(--muted); }
+  .row .addr { font-size: 12px; color: var(--muted); }
+  .row a { color: var(--muted); font-size: 12px; text-decoration: none; white-space: nowrap; }
+  .row a:hover { color: var(--accent); text-decoration: underline; }
+
+  .pill {
+    font-size: 10px; letter-spacing: .1em; padding: 3px 8px;
+    border: 1px solid currentColor; white-space: nowrap;
+  }
+  .pill.open { color: var(--accent); }
+  .pill.closed { color: var(--brass); background: var(--brass-bg); }
+
+  .empty { color: var(--muted); padding: 30px 0; text-align: center; font-size: 13px; }
+  .empty b { color: var(--ink); font-weight: 500; }
+
+  footer {
+    margin-top: 46px; padding-block: 20px 46px;
+    border-top: 2px solid var(--ink); color: var(--muted); font-size: 12px;
+  }
+  footer a { color: var(--accent); }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .xlink, .row a { transition: background .12s, color .12s; }
+  }
+</style>
+
+<div class="wrap">
+  <header>
+    <img class="mark" src="data:image/jpeg;base64,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" alt="TagOnLong" width="34" height="34">
+    <span class="wordmark">TagOnLong</span>
+    <a class="xlink" href="https://x.com/tagonlong" target="_blank" rel="noopener">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M18.9 2H22l-7.1 8.1L23.2 22h-6.5l-5.1-6.6L5.8 22H2.7l7.6-8.7L1.5 2h6.7l4.6 6.1L18.9 2Z"/>
+      </svg>
+      @tagonlong
+    </a>
+  </header>
+
+  <div class="hero">
+    <div class="eyebrow">ROBINHOOD CHAIN <b>&middot;</b> 4663 <b>&middot;</b> VIA LONG.XYZ</div>
+    <h1>Every token we launch, <em>on one page.</em></h1>
+    <p class="lede">
+      Read straight from the chain. A token shows up here on its own once the
+      launch confirms &mdash; nothing to add, nothing to update.
+    </p>
+  </div>
+
+  <div class="screen">
+    <div class="screen-inner">
+      <div class="screen-bar">
+        <span class="dot"></span>
+        <span id="status">READING CHAIN</span>
+        <span class="count" id="count"></span>
+      </div>
+      <div id="list"><div class="empty">Scanning blocks&hellip;</div></div>
+    </div>
+  </div>
+
+  <footer>
+    Built on <a href="https://docs.robinhood.com/chain/" target="_blank" rel="noopener">Robinhood Chain</a>
+    &middot; launched through <a href="https://long.xyz" target="_blank" rel="noopener">Long.xyz</a>
+    &middot; <a href="https://x.com/tagonlong" target="_blank" rel="noopener">@tagonlong</a><br>
+    Tokens are permissionless and unvetted. Not investment advice.
+  </footer>
+</div>
+
+<script>
+(() => {
+  'use strict';
+
+  // =========================================================================
+  // CONFIGURE THIS — the only line you need to change.
+  //
+  // Your deployer address. The page then shows only tokens created by that
+  // wallet. Leave it '' to show every Long.xyz launch instead.
+  // =========================================================================
+  const DEPLOYER = '';
+
+  const RPC = 'https://rpc.mainnet.chain.robinhood.com';   // Robinhood Chain 4663
+  const FACTORY = '0x22e99278308b393ea1260859b181ad7e78f5eeed';
+  const EXPLORER = 'https://robinhoodchain.blockscout.com';
+
+  // keccak256("Created(address,address,address,bytes32,uint256,uint256,string)")
+  const TOPIC_CREATED = '0x0b7b700cd8f102768d3c0ba9f781d33e3ee622c265ac64799468c1312fe9e387';
+
+  // Most RPCs cap how wide a single eth_getLogs may be, so the scan walks
+  // backwards in chunks instead of asking for the whole chain at once.
+  const CHUNK = 50000;
+  const MAX_CHUNKS = 12;
+
+  const $ = (id) => document.getElementById(id);
+  const esc = (v) => String(v ?? '').replace(/[&<>"']/g, (c) =>
+    ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const short = (a) => a && a.length > 12 ? a.slice(0, 6) + '…' + a.slice(-4) : (a || '—');
+
+  let rpcId = 0;
+  async function rpc(method, params) {
+    const res = await fetch(RPC, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ jsonrpc: '2.0', id: ++rpcId, method, params }),
+      signal: AbortSignal.timeout(15000),
+    });
+    const body = await res.json();
+    if (body.error) throw new Error(body.error.message || 'RPC error');
+    return body.result;
+  }
+
+  // ---- ABI decoding, by hand -------------------------------------------
+  // Created(address indexed asset, address hook, address creator, bytes32 poolId,
+  //         uint256 epochStart, uint256 epochEnd, string name)
+  // `asset` is indexed so it is in topics[1]; the rest are 32-byte words in
+  // data, with `name` a dynamic string at the offset word 5 carries.
+
+  const word = (d, i) => d.slice(2 + i * 64, 2 + (i + 1) * 64);
+  const toAddress = (w) => '0x' + w.slice(24);
+
+  function decodeString(data, offsetWord) {
+    try {
+      const off = parseInt(word(data, offsetWord), 16) * 2;
+      const len = parseInt(data.slice(2 + off, 2 + off + 64), 16);
+      if (!len || len > 200) return null;
+      const hex = data.slice(2 + off + 64, 2 + off + 64 + len * 2);
+      let s = '';
+      for (let i = 0; i < hex.length; i += 2) s += String.fromCharCode(parseInt(hex.substr(i, 2), 16));
+      return decodeURIComponent(escape(s));
+    } catch (e) { return null; }
+  }
+
+  function decodeCreated(e) {
+    const d = e.data;
+    return {
+      asset: '0x' + e.topics[1].slice(26),
+      creator: toAddress(word(d, 1)),
+      epochEnd: parseInt(word(d, 4), 16),
+      name: decodeString(d, 5),
+    };
+  }
+
+  async function readSymbol(address) {
+    try {
+      const out = await rpc('eth_call', [{ to: address, data: '0x95d89b41' }, 'latest']);
+      return (!out || out === '0x') ? null : decodeString(out, 0);
+    } catch (e) { return null; }
+  }
+
+  function render(tokens, done) {
+    $('count').textContent = tokens.length ? tokens.length + (tokens.length === 1 ? ' TOKEN' : ' TOKENS') : '';
+    $('status').textContent = done ? 'LIVE' : 'READING CHAIN';
+
+    if (!tokens.length) {
+      $('list').innerHTML = '<div class="empty">' + (done
+        ? (DEPLOYER ? 'No tokens from <b>' + esc(short(DEPLOYER)) + '</b> in the blocks scanned.'
+                    : 'No launches found in the blocks scanned.')
+        : 'Scanning blocks…') + '</div>';
+      return;
+    }
+
+    const now = Math.floor(Date.now() / 1000);
+    $('list').innerHTML = tokens.map((t) => {
+      const closed = t.epochEnd ? now >= t.epochEnd : false;
+      return '<div class="row">' +
+        '<div class="grow">' +
+          '<div class="name">' + esc(t.name || 'Unnamed') +
+            (t.symbol ? ' <span>$' + esc(t.symbol) + '</span>' : '') + '</div>' +
+          '<div class="addr">' + short(t.asset) + '</div>' +
+        '</div>' +
+        '<span class="pill ' + (closed ? 'closed' : 'open') + '">' + (closed ? 'CLOSED' : 'OPEN') + '</span>' +
+        '<a href="' + EXPLORER + '/address/' + esc(t.asset) + '" target="_blank" rel="noopener">VIEW &rarr;</a>' +
+      '</div>';
+    }).join('');
+  }
+
+  async function load() {
+    try {
+      const head = parseInt(await rpc('eth_blockNumber', []), 16);
+      const wanted = DEPLOYER ? DEPLOYER.toLowerCase() : null;
+      const found = [];
+
+      // Walk backwards from the head — newest first is also the order to show.
+      for (let i = 0; i < MAX_CHUNKS && found.length < 20; i++) {
+        const to = head - i * CHUNK;
+        if (to < 0) break;
+        const from = Math.max(0, to - CHUNK + 1);
+
+        let logs;
+        try {
+          logs = await rpc('eth_getLogs', [{
+            address: FACTORY, topics: [TOPIC_CREATED],
+            fromBlock: '0x' + from.toString(16), toBlock: '0x' + to.toString(16),
+          }]);
+        } catch (e) {
+          continue; // a chunk the RPC refuses should not end the scan
+        }
+
+        for (const entry of logs.reverse()) {
+          const t = decodeCreated(entry);
+          if (wanted && t.creator.toLowerCase() !== wanted) continue;
+          found.push(t);
+        }
+        if (from === 0) break;
+      }
+
+      // Show the list immediately, then fill tickers in behind it.
+      render(found, true);
+      for (const t of found) t.symbol = await readSymbol(t.asset);
+      render(found, true);
+    } catch (e) {
+      $('status').textContent = 'OFFLINE';
+      $('list').innerHTML =
+        '<div class="empty">Could not reach the chain. If this page was opened as a ' +
+        'file rather than from a web server, the browser blocks the request — ' +
+        'serve it over http(s).</div>';
+    }
+  }
+
+  load();
+  setInterval(load, 120000);
+})();
+</script>
